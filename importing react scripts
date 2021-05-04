@@ -1,0 +1,73 @@
+
+1 )This three lines are important to include inside a head section for installing react in your html document.
+
+
+ <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+_______________________________________________________________________________________________________________________________________________________________________
+
+2)plain HTML document after installing react and a div component with an id container.
+
+ <!DOCTYPE html>
+<html>
+<head>
+<title>React App</title>
+<script src= "https://unpkg.com/react@17/umd/react.development.js"></script>
+<script src = "https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+ <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+<div id = "container"></div>
+<script type = "text/babel">
+
+</script>
+</body>
+</html>
+
+_________________________________________________________________________________________________________________________________________________________________________
+
+Question about react+++++++++++++++++++++++++++++++++++++++++++++++++
+
+1)What is react Component?
+
+- React components are reusable chunks of javascript that output (via JSX) HTML elements.
+
+
+Creating a Hello World! component ----------------
+
+* What we want to do is use a component to help us print the famous "Hello, World!".
+* As we already known, by using just the render method of ReactDOM, the code would look as follows.
+
+programm 1-----------------------------------------------|
+
+ReactDOM.render(
+<div>
+<p>Hello , World!</p>
+</div>
+document.querySelector("#container")
+);
+---------------------------------------------------------|
+
+* We are going to create them initially is by using React.createClass.
+
+programm 2 ----------------------------------------------|
+var HelloWorld = React.createClass({
+});
+
+ReactDOM.render(
+<div>
+<p>Hello World!</p>
+</div>,
+document.querySelector("#container")
+);
+---------------------------------------------------------|
+
+* What we have done is create a new component called HelloWorld. This HelloWorld component doesn't do anything right now.
+* it is basically an empty JavaScript object at this point.
+* Inside this object, you can put all short of properties to futher define what HelloWorld does.
+* some properties you define are special and used by react to help your components work their magic.
+* one such mandatory property is render.
+
