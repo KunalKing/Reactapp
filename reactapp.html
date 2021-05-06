@@ -1,26 +1,48 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
-<title>React App</title>
-</head>
+ <meta charset = "utf-8">
+ <title>React Components</title>
+ </head>
+ 
+ <body>
+  
+  
+<!-- Target Container -->
+ <div id = "root"></div>
+  
+  
 
-<body>
-<div id = "name"></div>
-
-<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-
-<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
-
-<script>
-
- const name = React.createElement("h1", null, "Hi I am kunal and this is my first react app")
-
-  ReactDOM.render(
-           name,
-           document.getElementById('name')
-)
-         console.log('name', name)
-
-</script>
-</body>
+<!-- React 17 Library & React 17 DOM-->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  
+  <script>
+  
+   class IngredientsList extends React.component{
+   render(){
+    return React.createElement("ul", {className: "ingredients"},
+           this.props.items.map((ingredient,i) =>
+                    React.createElement("li", {key: i}, ingredient)
+        )
+       )
+     }
+   }
+   
+   const items = [
+   "1 lb salmon",
+    "1 cup pine nuts",
+    "2 cups Butter Lettuce",
+    "1 yellow squash",
+    "1/2 cup olive oil",
+    "3 cloves of Gralic"
+   ]
+   
+   ReactDOM.render(
+    React.createElement(Ingredients, {items}, null),
+    document.getElementById('root')
+   )
+  
+  </script>
+ </body>
 </html>
