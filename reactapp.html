@@ -9,33 +9,131 @@
 
   <div id = "root"></div>  
   
-<!-- React 17 Library & React 17 DOM-->
+<!-- React 17 Library, React 17 DOM & JSX-->
     <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
-  
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   
   
   <script>
+   <script type = "text/babel">
+   /*The data below is expressed in an array of two Javascript objects. Each object contains
+   name of the recipe, a list of the ingredients reuired, and a list of steps necessary to 
+   cook the recipe.*/
   
-   const items = [                       
-   "2 lb salmon",
-   "5 springs fresh rosemarry",
-    "2 tablespoon olive oil",
-    "1 teaspoon kosher salt",
-    "4 cloves of chopped garlic"
-   ]
+   const data =[
+    
+    {
+    name: "Baked Salmon",
+     ingredients:[
+      {name:"salmon", amount:1, measurement: "1 lb"},
+      {name:"Pine nuts", amount:1, measurement: "cup"},
+      {name:"Butter Lettuce", amount:2, measurement:"cups"},
+      {name:"Yellow Squach", amount:2, measurement:"med"},
+      {name:"Olive oil", amount:1, measurement:"cup"},
+      {name:"Garlic", amount:3, measurement:"cloves"}
+     ],
+     
+     steps:[
+     "Preheat the oven to 350 degrees:",
+      "Spread the olive oil around a glass baking dish.",
+      "Add the yellow squash and place in the oven for 30 mins.",
+      "Add salmon, garlic and pine nuts to the dish.",
+      "Bake for 15 minutes.",
+      "Remove from oven. Add the lettuce and serve."
+     ]
+    },
+    
+    
+    {
+    name: "Fish Tacos",
+     ingredients:[
+      {name: "Whitefish", amount:1, measurement:"1 lb"},
+      {name: "Cheese", amount:1, measurement:"cup"},
+      {name: "Iceberg Lettuce", amount:2, measurement: "cups"},
+      {name:"Tomatoes", amount:2, measurement: "large"},
+      {name:"Tortillas", amount:3, measurement: "med"}
+     ],
+     
+     steps: [
+     "Cook th fish on the grill until cooked through.",
+      "Place the fish on the 3 tortillas.",
+      "Top them with lettuce, tomatoes, and cheese."
+     ]
+    }
+   ];
    
-   const ingredients = React.createElement(
-   "ul",
-    {className: "ingredients"},
-    items.map((ingredient, i) => React.createElement("li",{key: i}, ingredient))
-   )
+ 
+   
+   /*I am creating a UI for these recipes with two components: a Menu
+component for listing the recipes and a Recipe component that
+describes the UI for each recipe. It’s the Menu component that we’ll
+render to the DOM. We’ll pass our data to the Menu component as a
+property called recipes:*/
    
   
-   ReactDOM.render(ingredients, document.getElementById('root'))
-  
+  /*A function component for an individual Recipe*/ 
+   function Recipe ({name, ingredients, steps}){
+   return(
+   <section id = {name.toLowerCase().replace(/ /g, "-")}>
+    <h1>{name}</h1>
+   <ul className = "ingredients">
+    {ingredients.map((ingredient, i) =>(
+     <li key={i}>{ingredient.name}</li>
+   ))}
+   </ul>
    
-   console.log ('ingredients')
+   <section className= "instructions">
+    <h2>Cooking Instructions</h2>
+   {steps.map((step,i) =>(
+   <p key={i}>{step}</p>
+   ))}
+   </section>
+   </section>
+   );
+   }
+   
+   /*A function component for the menu of recipes*/
+   function Menu (props){
+  return(
+  <article>
+   <header>
+   <h1>{props.title}<h1>
+   </header>
+   
+   
+   
+   <div className= "recipes"> 
+   {props.recipes.map((recipe, i) =>(
+  <Recipe
+   key={i}                                  /*In order to list the recipes within the div.recipes element, 
+                                            we usecurly braces to add a JavaScript expression that will return an array of
+                                            children. We can use the map function on the props.recipes array to
+                                            return a component for each object within the array. As mentioned
+                                            previously, each recipe contains a name, some ingredients, and cooking
+                                            instructions (steps). We’ll need to pass this data to each Recipe as
+                                            props. Also remember that we should use the key property to uniquely
+                                            identify each element.*/
+   name={recipe.name}
+   ingredients={recipe.ingredients}
+   steps={recipe.steps}
+   />
+  ))}
+   </div>
+   </article>
+  );
+  }
+   
+  
+ 
+  
+  
+   /*A call to ReactDOM.render to render our menu into the current DOM*/
+   ReactDOM.render(
+   <Menu recipes={data} title="Delicious Recipes" />,
+  document.getElementById("root")
+   );
+  
   </script>
  </body>
 </html>
